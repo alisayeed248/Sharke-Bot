@@ -18,14 +18,12 @@ const client = new Client({
 
 const rest = new REST({ versionn: '10' }).setToken(TOKEN);
 
-client.login(TOKEN);
-
 client.on('ready', () => console.log(`${client.user.tag} has logged in!`));
 client.on('interactionCreate', (interaction) => {
     if (interaction.isChatInputCommand()) {
         console.log('Hello');
         console.log(interaction.options.get('speak').value);
-        interaction.reply({ content: 'hi~' });
+        interaction.reply({ content: interaction.options.get('speak').value });
     }
 });
 
@@ -33,11 +31,11 @@ async function main() {
     const commands = [
         {
             name: 'sentience',
-            description: 'sharke',
+            description: '...',
             options: [
                 {
                 name: 'speak',
-                description: 'i speak',
+                description: 'type',
                 type: 3, 
                 required: true,
                 },
