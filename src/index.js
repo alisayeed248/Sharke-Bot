@@ -21,8 +21,6 @@ const rest = new REST({ versionn: '10' }).setToken(TOKEN);
 client.on('ready', () => console.log(`${client.user.tag} has logged in!`));
 client.on('interactionCreate', (interaction) => {
     if (interaction.isChatInputCommand()) {
-        console.log('Hello');
-        console.log(interaction.options.get('speak').value);
         interaction.reply({ content: interaction.options.get('speak').value });
     }
 });
@@ -34,10 +32,37 @@ async function main() {
             description: '...',
             options: [
                 {
-                name: 'speak',
-                description: 'type',
-                type: 3, 
-                required: true,
+                    name: 'speak',
+                    description: 'type',
+                    type: 3, 
+                    required: true,
+                    choices: [
+                        {
+                            name: "name",
+                            value: "Name",
+                        },
+                        {
+                            name: "test",
+                            value: "test1",
+
+                        },
+                    ],
+                },
+                {
+                    name: 'bother',
+                    description: 'annoy sharke',
+                    type: 3,
+                    required: true,
+                    choices: [
+                        {
+                            name: 'a lot',
+                            value: 'a lot',
+                        },
+                        {
+                            name: 'a little',
+                            value: 'a little',
+                        },
+                    ],
                 },
             ],
         },
