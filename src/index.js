@@ -24,15 +24,24 @@ client.on('ready', () => console.log(`${client.user.tag} has logged in!`));
 client.on('interactionCreate', (interaction) => {
     if (interaction.isChatInputCommand()) {
         console.log('Hello');
+        console.log(interaction.options.get('speak').value);
+        interaction.reply({ content: 'hi~' });
     }
-    interaction.reply({ content: 'Hi' });
 });
 
 async function main() {
     const commands = [
         {
-            name: 'order',
-            description: 'thing',
+            name: 'sentience',
+            description: 'sharke',
+            options: [
+                {
+                name: 'speak',
+                description: 'i speak',
+                type: 3, 
+                required: true,
+                },
+            ],
         },
     ];
     try {
