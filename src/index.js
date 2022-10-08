@@ -20,15 +20,19 @@ const rest = new REST({ versionn: '10' }).setToken(TOKEN);
 
 client.login(TOKEN);
 
-client.on('ready', () => {
-    console.log(`${client.user.tag} has logged in!`);
+client.on('ready', () => console.log(`${client.user.tag} has logged in!`));
+client.on('interactionCreate', (interaction) => {
+    if (interaction.isChatInputCommand()) {
+        console.log('Hello');
+    }
+    interaction.reply({ content: 'Hi' });
 });
 
 async function main() {
     const commands = [
         {
-            name: 'test',
-            description: 'test',
+            name: 'order',
+            description: 'thing',
         },
     ];
     try {
