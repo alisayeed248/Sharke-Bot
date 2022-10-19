@@ -1,6 +1,11 @@
 import { config } from 'dotenv';
 import { Client, GatewayIntentBits, Routes } from 'discord.js';
 import { REST } from '@discordjs/rest'; 
+import OrderCommand from './commands/order.js';
+import RolesCommand from './commands/roles.js';
+import UsersCommand from './commands/user.js';
+import ChannelsCommand from './commands/channel.js';
+import BanCommand from './commands/ban.js';
 
 config();
 
@@ -19,54 +24,26 @@ const client = new Client({
 const rest = new REST({ versionn: '10' }).setToken(TOKEN);
 
 client.on('ready', () => console.log(`${client.user.tag} has logged in!`));
+
 client.on('interactionCreate', (interaction) => {
     if (interaction.isChatInputCommand()) {
-        interaction.reply({ content: interaction.options.get('speak').value });
+
+        if(interaction.commandName === 'order') {
+            console.log('Order Command');
+            console.log(interaction);
+            
+        }
+        // if (interaction.commandName ==
+        /*
+        const words = interaction.options.get('test').value;
+        interaction.reply({ content: ` ${words} ` });
+        */
     }
 });
 
 async function main() {
-    const commands = [
-        {
-            name: 'sentience',
-            description: '...',
-            options: [
-                {
-                    name: 'speak',
-                    description: 'type',
-                    type: 3, 
-                    required: true,
-                    choices: [
-                        {
-                            name: "name",
-                            value: "Name",
-                        },
-                        {
-                            name: "test",
-                            value: "test1",
 
-                        },
-                    ],
-                },
-                {
-                    name: 'bother',
-                    description: 'annoy sharke',
-                    type: 3,
-                    required: true,
-                    choices: [
-                        {
-                            name: 'a lot',
-                            value: 'a lot',
-                        },
-                        {
-                            name: 'a little',
-                            value: 'a little',
-                        },
-                    ],
-                },
-            ],
-        },
-    ];
+    const commands = [ChannelsCommand]; //add commands to this array
     try {
         console.log('Started refreshing application (/) commands.');
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
